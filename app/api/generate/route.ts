@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
       Original Blog URL: ${originalUrl || "N/A"}
       
       BLOG CONTENT:
-      ${content.substring(0, 20000)} // Limit context to avoid errors, though Gemini handles large context well.
+      ${content.substring(0, 20000)}
       
       INSTRUCTIONS:
       1. Analyze the core message, hook, and value pillars of the blog.

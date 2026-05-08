@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 
 export function InputSection({ onGenerate, isLoading }: { onGenerate: (url: string) => void, isLoading: boolean }) {
   const [url, setUrl] = useState("");
@@ -16,44 +15,40 @@ export function InputSection({ onGenerate, isLoading }: { onGenerate: (url: stri
   };
 
   return (
-    <section className="flex flex-col items-center justify-center py-20 px-4 text-center space-y-8 max-w-3xl mx-auto">
-      <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 text-secondary-foreground text-sm font-medium">
-          <Sparkles className="w-4 h-4 text-primary" />
-          <span>AI-Powered Content Repurposing</span>
-        </div>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground">
-          Turn Blog Posts into <span className="text-primary">Viral Content</span>
+    <section className="w-full max-w-4xl mx-auto px-8 pt-20 pb-16 space-y-10">
+      <div className="space-y-4 max-w-2xl">
+        <h1 className="font-display text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.06]">
+          Turn blog posts into{" "}
+          <span className="text-primary italic">social assets</span>
         </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Paste a URL instantly generate LinkedIn posts, Twitter threads, and SEO metadata.
+        <p className="text-base text-muted-foreground leading-relaxed max-w-lg">
+          Paste a URL. Get LinkedIn posts, a Twitter thread, SEO metadata, and a video script — ready to publish.
         </p>
       </div>
 
-      <Card className="w-full max-w-lg shadow-lg border-muted">
-        <CardContent className="p-2">
-          <form onSubmit={handleSubmit} className="flex gap-2 p-1">
-            <Input 
-              placeholder="https://upgrowth.in/blog/..." 
-              className="border-0 focus-visible:ring-0 shadow-none text-base h-12 placeholder:text-gray-400"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
-            <Button size="lg" className="h-12 px-6" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Generating...
-                </>
-              ) : (
-                <>
-                  Generate <ArrowRight className="ml-2 w-4 h-4" />
-                </>
-              )}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl">
+        <label htmlFor="blog-url" className="sr-only">Blog post URL</label>
+        <Input
+          id="blog-url"
+          type="url"
+          placeholder="https://yourblog.com/post-title"
+          className="h-11 text-sm flex-1"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        />
+        <Button className="h-11 px-5 sm:shrink-0 w-full sm:w-auto" disabled={isLoading}>
+          {isLoading ? (
+            <>
+              <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
+              Generating
+            </>
+          ) : (
+            <>
+              Generate <ArrowRight className="ml-2 w-3.5 h-3.5" />
+            </>
+          )}
+        </Button>
+      </form>
     </section>
   );
 }
